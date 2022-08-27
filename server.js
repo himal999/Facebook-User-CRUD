@@ -6,7 +6,7 @@ import db from './mongoose/connection.js';
 const PORT = 5000;
 
 db.on('error', console.error.bind(console, 'DB CONNECTION ERROR...'));
-db.on('open', () => {
+db.once('open', () => {
   console.log('DB CONNECTED...');
 });
 
