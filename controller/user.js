@@ -11,6 +11,26 @@ const getAllCustomer = (req, res) => {
       });
     });
 };
+const findCustomer = (req, res) => {
+  const body = req.params;
+  const id = body.id;
+
+  Scheme.findById(id)
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: 'Not Found Customer',
+        });
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: error.message || "Can't find customer",
+      });
+    });
+};
 
 const createCustomer = (req, res) => {
   const user = req.body;
@@ -73,4 +93,4 @@ const createCustomer = (req, res) => {
     });
 };
 
-export { getAllCustomer, createCustomer };
+export { getAllCustomer, createCustomer, findCustomer };
