@@ -155,4 +155,31 @@ const updateCustomer = (req, res) => {
     });
 };
 
-export { getAllCustomer, createCustomer, findCustomer, updateCustomer };
+const deleteUser = (req, res) => {
+  const id = req.params.id;
+
+  Scheme.findByIdAndDelete(id)
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: 'Not Found User',
+        });
+      }
+      res.status(200).send({
+        message: 'User Delete Succes...',
+      });
+    })
+    .catch((error) => {
+      res.status(500).send(error.message, {
+        message: 'Try again',
+      });
+    });
+};
+
+export {
+  getAllCustomer,
+  createCustomer,
+  findCustomer,
+  updateCustomer,
+  deleteUser,
+};
