@@ -1,7 +1,15 @@
 import Scheme from '../mongoose/model/Schema.js';
 
 const getAllCustomer = (req, res) => {
-  res.send('Hello from controller');
+  Scheme.find()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: error.message || 'Faild',
+      });
+    });
 };
 
 const createCustomer = (req, res) => {
